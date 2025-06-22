@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'scheduleinterface.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.8.2
+## Created by: Qt User Interface Compiler version 6.9.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QFrame, QGridLayout,
-    QHBoxLayout, QLabel, QLineEdit, QMainWindow,
-    QMenuBar, QPushButton, QSizePolicy, QStatusBar,
+from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QCheckBox, QFrame,
+    QGridLayout, QHBoxLayout, QLabel, QLineEdit,
+    QMainWindow, QMenuBar, QSizePolicy, QStatusBar,
     QTextEdit, QWidget)
 
 class Ui_MainWindow(object):
@@ -30,7 +30,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.frame = QFrame(self.centralwidget)
         self.frame.setObjectName(u"frame")
-        self.frame.setGeometry(QRect(60, 320, 1321, 541))
+        self.frame.setGeometry(QRect(60, 310, 1321, 541))
         self.frame.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout_2 = QGridLayout(self.frame)
@@ -660,59 +660,47 @@ class Ui_MainWindow(object):
 
         self.frame_2 = QFrame(self.centralwidget)
         self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setGeometry(QRect(120, 30, 1191, 131))
+        self.frame_2.setGeometry(QRect(200, 30, 1321, 131))
         self.frame_2.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout = QGridLayout(self.frame_2)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.timeButton = QPushButton(self.frame_2)
-        self.timeButton.setObjectName(u"timeButton")
-        sizePolicy.setHeightForWidth(self.timeButton.sizePolicy().hasHeightForWidth())
-        self.timeButton.setSizePolicy(sizePolicy)
+        self.weekBox = QCheckBox(self.frame_2)
+        self.weekBox.setObjectName(u"weekBox")
 
-        self.gridLayout.addWidget(self.timeButton, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.weekBox, 0, 1, 1, 1)
 
-        self.weekButton = QPushButton(self.frame_2)
-        self.weekButton.setObjectName(u"weekButton")
-        sizePolicy.setHeightForWidth(self.weekButton.sizePolicy().hasHeightForWidth())
-        self.weekButton.setSizePolicy(sizePolicy)
+        self.teacherBox = QCheckBox(self.frame_2)
+        self.teacherBox.setObjectName(u"teacherBox")
 
-        self.gridLayout.addWidget(self.weekButton, 0, 1, 1, 1)
+        self.gridLayout.addWidget(self.teacherBox, 1, 1, 1, 1)
 
-        self.subjButton = QPushButton(self.frame_2)
-        self.subjButton.setObjectName(u"subjButton")
-        sizePolicy.setHeightForWidth(self.subjButton.sizePolicy().hasHeightForWidth())
-        self.subjButton.setSizePolicy(sizePolicy)
+        self.lessonBox = QCheckBox(self.frame_2)
+        self.lessonBox.setObjectName(u"lessonBox")
 
-        self.gridLayout.addWidget(self.subjButton, 0, 2, 1, 1)
+        self.gridLayout.addWidget(self.lessonBox, 1, 0, 1, 1)
 
-        self.typelessonButton = QPushButton(self.frame_2)
-        self.typelessonButton.setObjectName(u"typelessonButton")
-        sizePolicy.setHeightForWidth(self.typelessonButton.sizePolicy().hasHeightForWidth())
-        self.typelessonButton.setSizePolicy(sizePolicy)
+        self.timeBox = QCheckBox(self.frame_2)
+        self.timeBox.setObjectName(u"timeBox")
 
-        self.gridLayout.addWidget(self.typelessonButton, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.timeBox, 0, 0, 1, 1)
 
-        self.teacherButton = QPushButton(self.frame_2)
-        self.teacherButton.setObjectName(u"teacherButton")
-        sizePolicy.setHeightForWidth(self.teacherButton.sizePolicy().hasHeightForWidth())
-        self.teacherButton.setSizePolicy(sizePolicy)
+        self.subjectBox = QCheckBox(self.frame_2)
+        self.subjectBox.setObjectName(u"subjectBox")
 
-        self.gridLayout.addWidget(self.teacherButton, 1, 1, 1, 1)
+        self.gridLayout.addWidget(self.subjectBox, 0, 2, 1, 1)
 
-        self.roomButton = QPushButton(self.frame_2)
-        self.roomButton.setObjectName(u"roomButton")
-        sizePolicy.setHeightForWidth(self.roomButton.sizePolicy().hasHeightForWidth())
-        self.roomButton.setSizePolicy(sizePolicy)
+        self.roomBox = QCheckBox(self.frame_2)
+        self.roomBox.setObjectName(u"roomBox")
 
-        self.gridLayout.addWidget(self.roomButton, 1, 2, 1, 1)
+        self.gridLayout.addWidget(self.roomBox, 1, 2, 1, 1)
 
         self.lineEdit = QLineEdit(self.centralwidget)
         self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setGeometry(QRect(230, 170, 931, 61))
+        self.lineEdit.setGeometry(QRect(230, 180, 931, 61))
         self.layoutWidget = QWidget(self.centralwidget)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(140, 260, 1301, 73))
+        self.layoutWidget.setGeometry(QRect(140, 250, 1301, 73))
         self.horizontalLayout = QHBoxLayout(self.layoutWidget)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -777,12 +765,12 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.timeButton.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0420\u0415\u041c\u042f", None))
-        self.weekButton.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0415\u0414\u0415\u041b\u042f (\u0427\u0401\u0422/\u041d\u0415\u0427\u0401\u0422)", None))
-        self.subjButton.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0420\u0415\u0414\u041c\u0415\u0422", None))
-        self.typelessonButton.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0418\u041f \u0417\u0410\u041d\u042f\u0422\u0418\u0419 (\u041b\u0415\u041a\u0426\u0418\u042f/\u041f\u0420\u0410\u041a\u0422\u0418\u041a\u0410)", None))
-        self.teacherButton.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0420\u0415\u041f\u041e\u0414\u0410\u0412\u0410\u0422\u0415\u041b\u042c", None))
-        self.roomButton.setText(QCoreApplication.translate("MainWindow", u"\u0410\u0423\u0414\u0418\u0422\u041e\u0420\u0418\u042f", None))
+        self.weekBox.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0415\u0414\u0415\u041b\u042f (\u0427\u0401\u0422/\u041d\u0415\u0427\u0401\u0422)", None))
+        self.teacherBox.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0420\u0415\u041f\u041e\u0414\u0410\u0412\u0410\u0422\u0415\u041b\u042c", None))
+        self.lessonBox.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0418\u041f \u0417\u0410\u041d\u042f\u0422\u0418\u0419 (\u041b\u0415\u041a\u0426\u0418\u042f/\u041f\u0420\u0410\u041a\u0422\u0418\u041a\u0410)", None))
+        self.timeBox.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0420\u0415\u041c\u042f", None))
+        self.subjectBox.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0420\u0415\u0414\u041c\u0415\u0422", None))
+        self.roomBox.setText(QCoreApplication.translate("MainWindow", u"\u0410\u0423\u0414\u0418\u0422\u041e\u0420\u0418\u042f", None))
         self.lineEdit.setText("")
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u041f\u041d", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0422", None))

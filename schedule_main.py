@@ -135,12 +135,12 @@ class ScheduleInterface(QMainWindow):
 
         self.ui.lineEdit.editingFinished.connect(self.show_full)
 
-        self.ui.timeButton.clicked.connect(lambda: self.show_part('tme'))
-        self.ui.teacherButton.clicked.connect(lambda: self.show_part('teacher'))
-        self.ui.roomButton.clicked.connect(lambda: self.show_part('room'))
-        self.ui.subjButton.clicked.connect(lambda: self.show_part('subject'))
-        self.ui.weekButton.clicked.connect(lambda: self.show_part('type_week'))
-        self.ui.typelessonButton.clicked.connect(lambda: self.show_part('type_subject'))
+        self.ui.roomBox.stateChanged.connect(self.checkbox_filters)
+        self.ui.lessonBox.stateChanged.connect(self.checkbox_filters)
+        self.ui.teacherBox.stateChanged.connect(self.checkbox_filters)
+        self.ui.subjectBox.stateChanged.connect(self.checkbox_filters)
+        self.ui.weekBox.stateChanged.connect(self.checkbox_filters)
+        self.ui.timeBox.stateChanged.connect(self.checkbox_filters)
 
         self.daysntimes = {
             'понедельник': [
@@ -220,16 +220,11 @@ class ScheduleInterface(QMainWindow):
 
     def check_password(self, password):
         return password == '1'
-
+    
     def show_full(self):
         search = self.ui.lineEdit.text()
         for dayweek, timenwidget in self.daysntimes.items():
             self.display_schedule(search, dayweek, timenwidget)
-
-    def show_part(self, column_name):
-        search = self.ui.lineEdit.text()
-        for dayweek, timenwidget in self.daysntimes.items():
-            self.display_schedule(search, dayweek, timenwidget, column_name)
 
     def display_schedule(self, search, dayweek, timenwidget, column_name='*'):
         for time_sche, edit_widget in timenwidget:
@@ -240,11 +235,51 @@ class ScheduleInterface(QMainWindow):
             ''', (search, time_sche, dayweek))
 
             schedule = cursor.fetchall()
-            donescdl = [actsche for i in schedule for actsche in i]
-            res = '\n'.join(donescdl)
-            edit_widget.setText(res)
+            line_row = []
+            for row in schedule:
+                line_connect = '\n------------------------------\n'.join(item for item in row if item)
+                line_row.append(line_connect)
+            text = '\n'.join(line_row)
+            edit_widget.setText(text)
 
+    def checkbox_filters(self):
+        search = self.ui.lineEdit.text()
+        columns = []
+        if self.ui.timeBox.isChecked():
+            columns.append('tme')
+        if self.ui.teacherBox.isChecked():
+            columns.append('teacher')
+        if self.ui.lessonBox.isChecked():
+            columns.append('type_subject')
+        if self.ui.roomBox.isChecked():
+            columns.append('room')
+        if self.ui.subjectBox.isChecked():
+            columns.append('subject')
+        if self.ui.weekBox.isChecked():
+            columns.append('type_week')
 
+        if not columns:
+            for dayweek, timenwidget in self.daysntimes.items():
+                for _, edit_widget in timenwidget:
+                    edit_widget.clear()
+            return
+
+        for dayweek, timenwidget in self.daysntimes.items():
+            for time_sche, edit_widget in timenwidget:
+                column_name = ', '.join(columns)
+                cursor.execute(f'''
+                    SELECT {column_name}
+                    FROM schedule_h
+                    WHERE group_number = ? AND tme = ? AND day_week = ?;
+                ''', (search, time_sche, dayweek))
+                rows = cursor.fetchall()
+                line_row = []
+                for row in rows:
+                    line_connect = ' ||| '.join(item for item in row if item)
+                    line_row.append(line_connect)
+                text = '\n'.join(line_row)
+                edit_widget.setText(text)
+            
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
