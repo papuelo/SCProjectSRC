@@ -2,7 +2,8 @@ import sys
 import os
 import PySide6
 import sqlite3
-from PySide6.QtWidgets import QApplication, QMainWindow, QDialog, QInputDialog, QLineEdit, QButtonGroup
+from PySide6.QtWidgets import QApplication, QMainWindow, QDialog, QInputDialog, QLineEdit, QButtonGroup, QCompleter
+from PySide6.QtCore import Qt
 
 from genscheduleinterface import Ui_MainWindow
 from geneditwindow import Ui_Dialog
@@ -194,6 +195,8 @@ class ScheduleInterface(QMainWindow):
         self.ui.weekBox.stateChanged.connect(self.checkbox_filters)
         self.ui.timeBox.stateChanged.connect(self.checkbox_filters)
 
+        self.possible_line()
+
         self.daysntimes = {
             'понедельник': [
                 ("8.30-10.00", self.ui.mon1Edit),
@@ -255,6 +258,14 @@ class ScheduleInterface(QMainWindow):
         self.connect_double_clicks()
 
         self.edit_window = EditWindow()
+    
+    def possible_line(self):
+        cursor.execute('SELECT DISTINCT group_number FROM schedule_h')
+        groups = [row[0] for row in cursor.fetchall() if row[0]]
+        completer = QCompleter(groups)
+        completer.setCaseSensitivity(Qt.CaseInsensitive)
+        completer.setFilterMode(Qt.MatchContains)
+        self.ui.lineEdit.setCompleter(completer)
 
     def connect_double_clicks(self):
         for dayweek, timenwidget in self.daysntimes.items():
