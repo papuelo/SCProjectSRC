@@ -2,7 +2,7 @@ import sys
 import os
 import PySide6
 import sqlite3
-from PySide6.QtWidgets import QApplication, QMainWindow, QDialog, QInputDialog, QLineEdit
+from PySide6.QtWidgets import QApplication, QMainWindow, QDialog, QInputDialog, QLineEdit, QButtonGroup
 
 from genscheduleinterface import Ui_MainWindow
 from geneditwindow import Ui_Dialog
@@ -13,7 +13,6 @@ cursor = conn.cursor()
 dirname = os.path.dirname(PySide6.__file__)
 plugin_path = os.path.join(dirname, 'plugins', 'platforms')
 os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
-
 
 class EditWindow(QDialog):
     def __init__(self):
@@ -26,104 +25,157 @@ class EditWindow(QDialog):
         self.current_day_week = None
         self.current_edit_widget = None
 
+        self.records = []
+        self.current_index = 0
+
         self.ui.saveButton.clicked.connect(self.save_edit)
         self.ui.deleteButton.clicked.connect(self.delete_edit)
+        self.ui.createButton.clicked.connect(self.create_edit)
+
+        self.ui.nextBtn.clicked.connect(self.load_next_record)
+
+        times = ["8.30-10.00", "10.10-11.40", "11.50-13.20", "13.50-15.20", "15.30-17.00", "17.10-18.40"]
+        self.ui.timeBox.addItems(times)
+
+        self.radChoose = QButtonGroup(self)
+        self.radChoose.addButton(self.ui.radChot)
+        self.radChoose.addButton(self.ui.radNech)
+        self.radChoose.addButton(self.ui.radNo)
+        self.radLess = QButtonGroup(self)
+        self.radLess.addButton(self.ui.radLec)
+        self.radLess.addButton(self.ui.radPrac)   
 
     def load_info(self, time_slot, group_number, day_week, edit_widget):
-        self.current_time_slot = time_slot
+        self.current_edit_widget = edit_widget
         self.current_group_number = group_number
         self.current_day_week = day_week
-        self.current_edit_widget = edit_widget
 
         cursor.execute('''
-            SELECT tme, type_week, subject, type_subject, teacher, room, group_number
+            SELECT id, tme, type_week, subject, type_subject, teacher, room, group_number, day_week
             FROM schedule_h
-            WHERE group_number = ? AND tme = ? AND day_week = ?;
-        ''', (group_number, time_slot, day_week))
-        row = cursor.fetchone()
+            WHERE group_number = ? AND day_week = ?;
+        ''', (group_number, day_week))
+        self.records = cursor.fetchall()
+        self.current_index = 0
 
-        if row:
-            time_val, nechot_val, subject_val, lesson_val, teacher_val, room_val, group_val = row
+        if self.records:
+            self.show_record(self.current_index)
         else:
-            time_val = time_slot
-            nechot_val = ''
-            subject_val = ''
-            lesson_val = ''
-            teacher_val = ''
-            room_val = ''
-            group_val = group_number
+            index = self.ui.timeBox.findText(time_slot)
+            if index >= 0:
+                self.ui.timeBox.setCurrentIndex(index)
+            self.ui.subjectETEXT.clear()
+            self.ui.teacherETEXT.clear()
+            self.ui.roomETEXT.clear()
+            self.ui.groupETEXT.setText(str(group_number))
+            self.ui.radNo.setChecked(True)
+            self.ui.radLec.setChecked(False)
+            self.ui.radPrac.setChecked(False)
 
-        self.ui.timeETEXT.setText(str(time_val))
-        self.ui.nechotETEXT.setText(str(nechot_val))
-        self.ui.subjectETEXT.setText(str(subject_val))
-        self.ui.lessonETEXT.setText(str(lesson_val))
-        self.ui.teacherETEXT.setText(str(teacher_val))
-        self.ui.roomETEXT.setText(str(room_val))
-        self.ui.groupETEXT.setText(str(group_val))
+            self.original_time_slot = time_slot
+            self.original_group_number = group_number
+            self.original_day_week = day_week
 
-        self.ui.timeELABE.setText(f"Время:")
-        self.ui.nechotELABE.setText("Нечёт/чёт:")
-        self.ui.subjectELABE.setText("Предмет:")
-        self.ui.lessonELABE.setText("Тип занятия:")
-        self.ui.teacherELABE.setText("Преподаватель:")
-        self.ui.roomELABE.setText("Аудитория:")
-        self.ui.groupELABE.setText("Номер группы:")
+            self.current_time_slot = time_slot
+            self.current_group_number = group_number
+            self.current_day_week = day_week
+
+    def show_record(self, index):
+        if 0 <= index < len(self.records):
+            self.current_id, time_val, nechot_val, subject_val, lesson_val, teacher_val, room_val, group_val, day_val = self.records[index]
+
+            self.current_time_slot = time_val
+            self.current_group_number = group_val
+            self.current_day_week = day_val
+
+            self.original_time_slot = time_val
+            self.original_group_number = group_val
+            self.original_day_week = day_val
+
+            index_time = self.ui.timeBox.findText(str(time_val))
+            if index_time >= 0:
+                self.ui.timeBox.setCurrentIndex(index_time)
+            self.ui.subjectETEXT.setText(str(subject_val))
+            self.ui.teacherETEXT.setText(str(teacher_val))
+            self.ui.roomETEXT.setText(str(room_val))
+            self.ui.groupETEXT.setText(str(group_val))
+
+            self.ui.radChot.setChecked(False)
+            self.ui.radNech.setChecked(False)
+            self.ui.radNo.setChecked(False)
+            self.ui.radLec.setChecked(False)
+            self.ui.radPrac.setChecked(False)
+
+            if nechot_val == 'чёт':
+                self.ui.radChot.setChecked(True)
+            elif nechot_val == 'нечёт':
+                self.ui.radNech.setChecked(True)
+            else:
+                self.ui.radNo.setChecked(True)
+
+            if lesson_val == 'лекция':
+                self.ui.radLec.setChecked(True)
+            elif lesson_val == 'практика':
+                self.ui.radPrac.setChecked(True)
+
+
+    def load_next_record(self):
+        if not self.records:
+            return
+        self.current_index += 1
+        if self.current_index >= len(self.records):
+            self.current_index = 0
+        self.show_record(self.current_index)
 
     def save_edit(self):
-        time_val = self.ui.timeETEXT.text()
-        nechot_val = self.ui.nechotETEXT.text()
+        time_val = self.ui.timeBox.currentText()
+        nechot_val = self.radChoose.checkedButton().text()
         subject_val = self.ui.subjectETEXT.text()
-        lesson_val = self.ui.lessonETEXT.text()
+        lesson_val = self.radLess.checkedButton().text()
         teacher_val = self.ui.teacherETEXT.text()
         room_val = self.ui.roomETEXT.text()
         group_val = self.ui.groupETEXT.text()
 
         cursor.execute('''
-            SELECT COUNT(*) FROM schedule_h
-            WHERE group_number = ? AND tme = ? AND day_week = ?;
-        ''', (self.current_group_number, self.current_time_slot, self.current_day_week))
-        exists = cursor.fetchone()[0] > 0
-
-        if exists:
-            cursor.execute('''
-                UPDATE schedule_h SET
-                    tme = ?,
-                    type_week = ?,
-                    subject = ?,
-                    type_subject = ?,
-                    teacher = ?,
-                    room = ?,
-                    group_number = ?
-                WHERE group_number = ? AND tme = ? AND day_week = ?;
-            ''', (time_val, nechot_val, subject_val, lesson_val, teacher_val, room_val, group_val,
-                  self.current_group_number, self.current_time_slot, self.current_day_week))
-        else:
-            cursor.execute('''
-                INSERT INTO schedule_h (tme, day_week, type_week, subject, type_subject, teacher, room, group_number)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?);
-            ''', (self.current_time_slot, self.current_day_week,
-                  nechot_val, subject_val, lesson_val, teacher_val, room_val, group_val))
-
+            UPDATE schedule_h SET
+                tme = ?,
+                type_week = ?,
+                subject = ?,
+                type_subject = ?,
+                teacher = ?,
+                room = ?,
+                group_number = ?,
+                day_week = ?
+            WHERE id = ?;
+        ''', (time_val, nechot_val, subject_val, lesson_val, teacher_val, room_val, group_val, self.current_day_week, self.current_id))
         conn.commit()
 
         self.close()
 
     def delete_edit(self):
         cursor.execute('''
-            SELECT COUNT(*) FROM schedule_h
-            WHERE group_number = ? AND tme = ? AND day_week = ?;
-        ''', (self.current_group_number, self.current_time_slot, self.current_day_week))
-        exists = cursor.fetchone()[0] > 0
+            DELETE FROM schedule_h
+            WHERE id = ?;
+        ''', (self.current_id,))
+        conn.commit()
+        self.close()
 
-        if exists:
-            cursor.execute('''
-                DELETE FROM schedule_h
-                WHERE group_number = ? AND tme = ? AND day_week = ?;
-            ''', (self.current_group_number, self.current_time_slot, self.current_day_week))
-            
-            conn.commit()
+    def create_edit(self):
+        time_val = self.ui.timeBox.currentText()
+        nechot_val = self.radChoose.checkedButton().text()
+        subject_val = self.ui.subjectETEXT.text()
+        lesson_val = self.radLess.checkedButton().text()
+        teacher_val = self.ui.teacherETEXT.text()
+        room_val = self.ui.roomETEXT.text()
+        group_val = self.ui.groupETEXT.text()
+        day_val = self.current_day_week
 
-            self.close()
+        cursor.execute('''
+            INSERT INTO schedule_h (tme, day_week, type_week, subject, type_subject, teacher, room, group_number)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+        ''', (time_val, day_val, nechot_val, subject_val, lesson_val, teacher_val, room_val, group_val))
+        conn.commit()
+        self.close()
 
 
 class ScheduleInterface(QMainWindow):
@@ -226,10 +278,10 @@ class ScheduleInterface(QMainWindow):
         for dayweek, timenwidget in self.daysntimes.items():
             self.display_schedule(search, dayweek, timenwidget)
 
-    def display_schedule(self, search, dayweek, timenwidget, column_name='*'):
+    def display_schedule(self, search, dayweek, timenwidget):
         for time_sche, edit_widget in timenwidget:
             cursor.execute(f'''
-                SELECT {column_name}
+                SELECT type_week, subject, type_subject, teacher, group_number, room
                 FROM schedule_h
                 WHERE group_number = ? and tme=? and day_week=?;		
             ''', (search, time_sche, dayweek))
@@ -237,7 +289,7 @@ class ScheduleInterface(QMainWindow):
             schedule = cursor.fetchall()
             line_row = []
             for row in schedule:
-                line_connect = '\n------------------------------\n'.join(item for item in row if item)
+                line_connect = '\n==================\n'.join(str(item) for item in row if item)+'\n++++++++++++++++++\n'
                 line_row.append(line_connect)
             text = '\n'.join(line_row)
             edit_widget.setText(text)
@@ -275,9 +327,9 @@ class ScheduleInterface(QMainWindow):
                 rows = cursor.fetchall()
                 line_row = []
                 for row in rows:
-                    line_connect = ' ||| '.join(item for item in row if item)
+                    line_connect = ' ||| '.join(str(item) for item in row if item)
                     line_row.append(line_connect)
-                text = '\n'.join(line_row)
+                text = '\n==================\n'.join(line_row)
                 edit_widget.setText(text)
             
 if __name__ == "__main__":
