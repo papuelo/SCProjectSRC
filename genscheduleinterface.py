@@ -26,11 +26,13 @@ class Ui_MainWindow(object):
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.setWindowModality(Qt.WindowModality.NonModal)
         MainWindow.resize(1440, 900)
+        MainWindow.setStyleSheet(u"background-color: rgb(255, 255, 255)")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
+        self.centralwidget.setStyleSheet(u"background-color: qlineargradient(spread:pad, x2:1, y1:1, x2:0, y2:0, stop:0 rgba(227, 235, 247, 255), stop:1 rgba(248, 237, 247, 255));")
         self.frame = QFrame(self.centralwidget)
         self.frame.setObjectName(u"frame")
-        self.frame.setGeometry(QRect(60, 120, 1351, 731))
+        self.frame.setGeometry(QRect(50, 120, 1351, 731))
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -39,9 +41,10 @@ class Ui_MainWindow(object):
         font = QFont()
         font.setKerning(True)
         self.frame.setFont(font)
-        self.frame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame.setStyleSheet(u"background-color: rgba(255, 255, 255, 120)")
+        self.frame.setFrameShape(QFrame.Shape.NoFrame)
         self.frame.setFrameShadow(QFrame.Shadow.Raised)
-        self.frame.setLineWidth(1)
+        self.frame.setLineWidth(0)
         self.gridLayout_2 = QGridLayout(self.frame)
         self.gridLayout_2.setSpacing(0)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
@@ -581,7 +584,10 @@ class Ui_MainWindow(object):
         self.mon1Edit_2.setObjectName(u"mon1Edit_2")
         sizePolicy1.setHeightForWidth(self.mon1Edit_2.sizePolicy().hasHeightForWidth())
         self.mon1Edit_2.setSizePolicy(sizePolicy1)
-        self.mon1Edit_2.setFont(font1)
+        font2 = QFont()
+        font2.setBold(False)
+        font2.setKerning(False)
+        self.mon1Edit_2.setFont(font2)
         self.mon1Edit_2.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
         self.mon1Edit_2.setFrameShape(QFrame.Shape.Panel)
         self.mon1Edit_2.setFrameShadow(QFrame.Shadow.Sunken)
@@ -596,7 +602,7 @@ class Ui_MainWindow(object):
         self.tue1Edit_2.setObjectName(u"tue1Edit_2")
         sizePolicy1.setHeightForWidth(self.tue1Edit_2.sizePolicy().hasHeightForWidth())
         self.tue1Edit_2.setSizePolicy(sizePolicy1)
-        self.tue1Edit_2.setFont(font1)
+        self.tue1Edit_2.setFont(font2)
         self.tue1Edit_2.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
         self.tue1Edit_2.setFrameShape(QFrame.Shape.Panel)
         self.tue1Edit_2.setFrameShadow(QFrame.Shadow.Sunken)
@@ -611,7 +617,7 @@ class Ui_MainWindow(object):
         self.wed1Edit_2.setObjectName(u"wed1Edit_2")
         sizePolicy1.setHeightForWidth(self.wed1Edit_2.sizePolicy().hasHeightForWidth())
         self.wed1Edit_2.setSizePolicy(sizePolicy1)
-        self.wed1Edit_2.setFont(font1)
+        self.wed1Edit_2.setFont(font2)
         self.wed1Edit_2.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
         self.wed1Edit_2.setFrameShape(QFrame.Shape.Panel)
         self.wed1Edit_2.setFrameShadow(QFrame.Shadow.Sunken)
@@ -626,7 +632,7 @@ class Ui_MainWindow(object):
         self.thr1Edit_2.setObjectName(u"thr1Edit_2")
         sizePolicy1.setHeightForWidth(self.thr1Edit_2.sizePolicy().hasHeightForWidth())
         self.thr1Edit_2.setSizePolicy(sizePolicy1)
-        self.thr1Edit_2.setFont(font1)
+        self.thr1Edit_2.setFont(font2)
         self.thr1Edit_2.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
         self.thr1Edit_2.setFrameShape(QFrame.Shape.Panel)
         self.thr1Edit_2.setFrameShadow(QFrame.Shadow.Sunken)
@@ -641,7 +647,7 @@ class Ui_MainWindow(object):
         self.fri1Edit_2.setObjectName(u"fri1Edit_2")
         sizePolicy1.setHeightForWidth(self.fri1Edit_2.sizePolicy().hasHeightForWidth())
         self.fri1Edit_2.setSizePolicy(sizePolicy1)
-        self.fri1Edit_2.setFont(font1)
+        self.fri1Edit_2.setFont(font2)
         self.fri1Edit_2.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
         self.fri1Edit_2.setFrameShape(QFrame.Shape.Panel)
         self.fri1Edit_2.setFrameShadow(QFrame.Shadow.Sunken)
@@ -656,7 +662,7 @@ class Ui_MainWindow(object):
         self.sat1Edit_2.setObjectName(u"sat1Edit_2")
         sizePolicy1.setHeightForWidth(self.sat1Edit_2.sizePolicy().hasHeightForWidth())
         self.sat1Edit_2.setSizePolicy(sizePolicy1)
-        self.sat1Edit_2.setFont(font1)
+        self.sat1Edit_2.setFont(font2)
         self.sat1Edit_2.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
         self.sat1Edit_2.setFrameShape(QFrame.Shape.Panel)
         self.sat1Edit_2.setFrameShadow(QFrame.Shadow.Sunken)
@@ -671,7 +677,7 @@ class Ui_MainWindow(object):
         self.sun1Edit_2.setObjectName(u"sun1Edit_2")
         sizePolicy1.setHeightForWidth(self.sun1Edit_2.sizePolicy().hasHeightForWidth())
         self.sun1Edit_2.setSizePolicy(sizePolicy1)
-        self.sun1Edit_2.setFont(font1)
+        self.sun1Edit_2.setFont(font2)
         self.sun1Edit_2.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
         self.sun1Edit_2.setFrameShape(QFrame.Shape.Panel)
         self.sun1Edit_2.setFrameShadow(QFrame.Shadow.Sunken)
@@ -939,77 +945,110 @@ class Ui_MainWindow(object):
 
         self.frame_2 = QFrame(self.centralwidget)
         self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setGeometry(QRect(30, 10, 1401, 101))
+        self.frame_2.setGeometry(QRect(20, -10, 1401, 131))
         self.frame_2.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.frame_2.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
         self.frame_2.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
         self.lineEdit = QLineEdit(self.frame_2)
         self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setGeometry(QRect(780, 30, 591, 48))
+        self.lineEdit.setGeometry(QRect(400, 102, 561, 21))
         sizePolicy2.setHeightForWidth(self.lineEdit.sizePolicy().hasHeightForWidth())
         self.lineEdit.setSizePolicy(sizePolicy2)
         self.lineEdit.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.lineEdit.setStyleSheet(u"background-color: rgba(255, 255, 255, 150)")
         self.lineEdit.setFrame(True)
+        self.lineEdit.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.lineEdit.setClearButtonEnabled(False)
-        self.layoutWidget = QWidget(self.frame_2)
+        self.frame_3 = QFrame(self.frame_2)
+        self.frame_3.setObjectName(u"frame_3")
+        self.frame_3.setGeometry(QRect(400, 15, 561, 81))
+        sizePolicy2.setHeightForWidth(self.frame_3.sizePolicy().hasHeightForWidth())
+        self.frame_3.setSizePolicy(sizePolicy2)
+        self.frame_3.setStyleSheet(u"background-color: rgba(255, 255, 255, 120)")
+        self.frame_3.setFrameShape(QFrame.Shape.Box)
+        self.frame_3.setFrameShadow(QFrame.Shadow.Raised)
+        self.layoutWidget = QWidget(self.frame_3)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(60, 10, 841, 94))
+        self.layoutWidget.setGeometry(QRect(50, 10, 461, 61))
+        sizePolicy.setHeightForWidth(self.layoutWidget.sizePolicy().hasHeightForWidth())
+        self.layoutWidget.setSizePolicy(sizePolicy)
         self.gridLayout = QGridLayout(self.layoutWidget)
         self.gridLayout.setSpacing(0)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.timeBox = QCheckBox(self.layoutWidget)
         self.timeBox.setObjectName(u"timeBox")
-        font2 = QFont()
-        font2.setPointSize(10)
-        font2.setBold(True)
-        font2.setItalic(False)
-        self.timeBox.setFont(font2)
+        sizePolicy.setHeightForWidth(self.timeBox.sizePolicy().hasHeightForWidth())
+        self.timeBox.setSizePolicy(sizePolicy)
+        font3 = QFont()
+        font3.setPointSize(10)
+        font3.setBold(True)
+        font3.setItalic(False)
+        self.timeBox.setFont(font3)
         self.timeBox.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.timeBox.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.gridLayout.addWidget(self.timeBox, 0, 0, 1, 1)
 
         self.subjectBox = QCheckBox(self.layoutWidget)
         self.subjectBox.setObjectName(u"subjectBox")
-        font3 = QFont()
-        font3.setPointSize(10)
-        font3.setBold(True)
-        self.subjectBox.setFont(font3)
+        sizePolicy.setHeightForWidth(self.subjectBox.sizePolicy().hasHeightForWidth())
+        self.subjectBox.setSizePolicy(sizePolicy)
+        font4 = QFont()
+        font4.setPointSize(10)
+        font4.setBold(True)
+        self.subjectBox.setFont(font4)
         self.subjectBox.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.subjectBox.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.gridLayout.addWidget(self.subjectBox, 0, 2, 1, 1)
 
         self.teacherBox = QCheckBox(self.layoutWidget)
         self.teacherBox.setObjectName(u"teacherBox")
-        self.teacherBox.setFont(font3)
+        sizePolicy.setHeightForWidth(self.teacherBox.sizePolicy().hasHeightForWidth())
+        self.teacherBox.setSizePolicy(sizePolicy)
+        self.teacherBox.setFont(font4)
         self.teacherBox.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.teacherBox.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.gridLayout.addWidget(self.teacherBox, 1, 1, 1, 1)
 
         self.roomBox = QCheckBox(self.layoutWidget)
         self.roomBox.setObjectName(u"roomBox")
-        self.roomBox.setFont(font3)
+        sizePolicy.setHeightForWidth(self.roomBox.sizePolicy().hasHeightForWidth())
+        self.roomBox.setSizePolicy(sizePolicy)
+        self.roomBox.setFont(font4)
         self.roomBox.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.roomBox.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.gridLayout.addWidget(self.roomBox, 1, 2, 1, 1)
 
         self.lessonBox = QCheckBox(self.layoutWidget)
         self.lessonBox.setObjectName(u"lessonBox")
-        self.lessonBox.setFont(font3)
+        sizePolicy.setHeightForWidth(self.lessonBox.sizePolicy().hasHeightForWidth())
+        self.lessonBox.setSizePolicy(sizePolicy)
+        self.lessonBox.setFont(font4)
         self.lessonBox.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.lessonBox.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.gridLayout.addWidget(self.lessonBox, 1, 0, 1, 1)
 
         self.weekBox = QCheckBox(self.layoutWidget)
         self.weekBox.setObjectName(u"weekBox")
-        self.weekBox.setFont(font3)
+        sizePolicy.setHeightForWidth(self.weekBox.sizePolicy().hasHeightForWidth())
+        self.weekBox.setSizePolicy(sizePolicy)
+        self.weekBox.setFont(font4)
         self.weekBox.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.weekBox.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.gridLayout.addWidget(self.weekBox, 0, 1, 1, 1)
 
-        self.layoutWidget.raise_()
-        self.lineEdit.raise_()
+        self.gridLayout.setColumnStretch(0, 1)
+        self.gridLayout.setColumnStretch(1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
+        self.frame_2.raise_()
+        self.frame.raise_()
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
         self.menubar.setGeometry(QRect(0, 0, 1440, 22))
@@ -1068,7 +1107,7 @@ class Ui_MainWindow(object):
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:28pt;\">\u041f\u041d</span></p></body></html>", None))
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:28pt; font-weight:700;\">\u041f\u041d</span></p></body></html>", None))
         self.tue1Edit_2.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -1076,7 +1115,7 @@ class Ui_MainWindow(object):
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:28pt;\">\u0412\u0422</span></p></body></html>", None))
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:28pt; font-weight:700;\">\u0412\u0422</span></p></body></html>", None))
         self.wed1Edit_2.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -1084,7 +1123,7 @@ class Ui_MainWindow(object):
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:28pt;\">\u0421\u0420</span></p></body></html>", None))
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:28pt; font-weight:700;\">\u0421\u0420</span></p></body></html>", None))
         self.thr1Edit_2.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -1092,7 +1131,7 @@ class Ui_MainWindow(object):
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:28pt;\">\u0427\u0422</span></p></body></html>", None))
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:28pt; font-weight:700;\">\u0427\u0422</span></p></body></html>", None))
         self.fri1Edit_2.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -1100,7 +1139,7 @@ class Ui_MainWindow(object):
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:28pt;\">\u041f\u0422</span></p></body></html>", None))
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:28pt; font-weight:700;\">\u041f\u0422</span></p></body></html>", None))
         self.sat1Edit_2.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -1108,7 +1147,7 @@ class Ui_MainWindow(object):
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:28pt;\">\u0421\u0411</span></p></body></html>", None))
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:28pt; font-weight:700;\">\u0421\u0411</span></p></body></html>", None))
         self.sun1Edit_2.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -1116,7 +1155,7 @@ class Ui_MainWindow(object):
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:28pt;\">\u0412\u0421</span></p></body></html>", None))
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:28pt; font-weight:700;\">\u0412\u0421</span></p></body></html>", None))
         self.mon1Edit_3.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -1136,11 +1175,12 @@ class Ui_MainWindow(object):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:22pt;\">10.10</span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:22pt;\">-11.40</span></p></body></html>", None))
         self.lineEdit.setText("")
+        self.lineEdit.setPlaceholderText("")
         self.timeBox.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0420\u0415\u041c\u042f", None))
         self.subjectBox.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0420\u0415\u0414\u041c\u0415\u0422", None))
         self.teacherBox.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0420\u0415\u041f\u041e\u0414\u0410\u0412\u0410\u0422\u0415\u041b\u042c", None))
         self.roomBox.setText(QCoreApplication.translate("MainWindow", u"\u0410\u0423\u0414\u0418\u0422\u041e\u0420\u0418\u042f", None))
-        self.lessonBox.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0418\u041f \u0417\u0410\u041d\u042f\u0422\u0418\u0419 (\u041b\u0415\u041a\u0426\u0418\u042f/\u041f\u0420\u0410\u041a\u0422\u0418\u041a\u0410)", None))
-        self.weekBox.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0415\u0414\u0415\u041b\u042f (\u0427\u0401\u0422/\u041d\u0415\u0427\u0401\u0422)", None))
+        self.lessonBox.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0418\u041f \u0417\u0410\u041d\u042f\u0422\u0418\u0419", None))
+        self.weekBox.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0415\u0414\u0415\u041b\u042f", None))
     # retranslateUi
 

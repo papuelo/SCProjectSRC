@@ -24,42 +24,52 @@ class Ui_Dialog(object):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
         Dialog.resize(769, 587)
+        Dialog.setStyleSheet(u"background-color: qlineargradient(spread:pad, x2:1, y1:1, x2:0, y2:0, stop:0 rgba(227, 235, 247, 255), stop:1 rgba(248, 237, 247, 255));")
         self.editframe = QFrame(Dialog)
         self.editframe.setObjectName(u"editframe")
-        self.editframe.setGeometry(QRect(20, 40, 731, 481))
+        self.editframe.setGeometry(QRect(20, 30, 731, 481))
         self.editframe.setFrameShape(QFrame.Shape.StyledPanel)
         self.editframe.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout = QGridLayout(self.editframe)
         self.gridLayout.setObjectName(u"gridLayout")
         self.timeELABE = QLabel(self.editframe)
         self.timeELABE.setObjectName(u"timeELABE")
+        self.timeELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.gridLayout.addWidget(self.timeELABE, 0, 0, 1, 1)
 
         self.roomETEXT = QLineEdit(self.editframe)
         self.roomETEXT.setObjectName(u"roomETEXT")
+        self.roomETEXT.setStyleSheet(u"background-color: rgba(255, 255, 255, 160)")
+        self.roomETEXT.setFrame(False)
 
         self.gridLayout.addWidget(self.roomETEXT, 5, 1, 1, 1)
 
         self.subjectETEXT = QLineEdit(self.editframe)
         self.subjectETEXT.setObjectName(u"subjectETEXT")
+        self.subjectETEXT.setStyleSheet(u"background-color: rgba(255, 255, 255, 160)")
+        self.subjectETEXT.setFrame(False)
 
         self.gridLayout.addWidget(self.subjectETEXT, 2, 1, 1, 1)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(80, -1, -1, -1)
         self.radChot = QRadioButton(self.editframe)
         self.radChot.setObjectName(u"radChot")
+        self.radChot.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.horizontalLayout.addWidget(self.radChot)
 
         self.radNech = QRadioButton(self.editframe)
         self.radNech.setObjectName(u"radNech")
+        self.radNech.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.horizontalLayout.addWidget(self.radNech)
 
         self.radNo = QRadioButton(self.editframe)
         self.radNo.setObjectName(u"radNo")
+        self.radNo.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.horizontalLayout.addWidget(self.radNo)
 
@@ -68,11 +78,13 @@ class Ui_Dialog(object):
 
         self.teacherELABE = QLabel(self.editframe)
         self.teacherELABE.setObjectName(u"teacherELABE")
+        self.teacherELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.gridLayout.addWidget(self.teacherELABE, 4, 0, 1, 1)
 
         self.groupELABE = QLabel(self.editframe)
         self.groupELABE.setObjectName(u"groupELABE")
+        self.groupELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.gridLayout.addWidget(self.groupELABE, 6, 0, 1, 1)
 
@@ -83,21 +95,26 @@ class Ui_Dialog(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lessonELABE.sizePolicy().hasHeightForWidth())
         self.lessonELABE.setSizePolicy(sizePolicy)
+        self.lessonELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.gridLayout.addWidget(self.lessonELABE, 3, 0, 1, 1)
 
         self.subjectELABE = QLabel(self.editframe)
         self.subjectELABE.setObjectName(u"subjectELABE")
+        self.subjectELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.gridLayout.addWidget(self.subjectELABE, 2, 0, 1, 1)
 
         self.roomELABE = QLabel(self.editframe)
         self.roomELABE.setObjectName(u"roomELABE")
+        self.roomELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.gridLayout.addWidget(self.roomELABE, 5, 0, 1, 1)
 
         self.groupETEXT = QLineEdit(self.editframe)
         self.groupETEXT.setObjectName(u"groupETEXT")
+        self.groupETEXT.setStyleSheet(u"background-color: rgba(255, 255, 255, 160)")
+        self.groupETEXT.setFrame(False)
 
         self.gridLayout.addWidget(self.groupETEXT, 6, 1, 1, 1)
 
@@ -105,23 +122,30 @@ class Ui_Dialog(object):
         self.nechotELABE.setObjectName(u"nechotELABE")
         sizePolicy.setHeightForWidth(self.nechotELABE.sizePolicy().hasHeightForWidth())
         self.nechotELABE.setSizePolicy(sizePolicy)
+        self.nechotELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.gridLayout.addWidget(self.nechotELABE, 1, 0, 1, 1)
 
         self.teacherETEXT = QLineEdit(self.editframe)
         self.teacherETEXT.setObjectName(u"teacherETEXT")
+        self.teacherETEXT.setStyleSheet(u"background-color: rgba(255, 255, 255, 160)")
+        self.teacherETEXT.setFrame(False)
 
         self.gridLayout.addWidget(self.teacherETEXT, 4, 1, 1, 1)
 
         self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.horizontalLayout_2.setContentsMargins(150, -1, -1, -1)
         self.radLec = QRadioButton(self.editframe)
         self.radLec.setObjectName(u"radLec")
+        self.radLec.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.horizontalLayout_2.addWidget(self.radLec)
 
         self.radPrac = QRadioButton(self.editframe)
         self.radPrac.setObjectName(u"radPrac")
+        self.radPrac.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.horizontalLayout_2.addWidget(self.radPrac)
 
@@ -130,47 +154,55 @@ class Ui_Dialog(object):
 
         self.timeBox = QComboBox(self.editframe)
         self.timeBox.setObjectName(u"timeBox")
+        self.timeBox.setAutoFillBackground(False)
+        self.timeBox.setStyleSheet(u"background-color: rgba(255, 255, 255, 70)")
+        self.timeBox.setFrame(True)
 
         self.gridLayout.addWidget(self.timeBox, 0, 1, 1, 1)
 
         self.frame = QFrame(Dialog)
         self.frame.setObjectName(u"frame")
         self.frame.setGeometry(QRect(10, 490, 751, 80))
+        self.frame.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
         self.frame.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QFrame.Shadow.Raised)
-        self.widget = QWidget(self.frame)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(10, 20, 731, 51))
-        self.horizontalLayout_3 = QHBoxLayout(self.widget)
+        self.layoutWidget = QWidget(self.frame)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(10, 20, 731, 51))
+        self.horizontalLayout_3 = QHBoxLayout(self.layoutWidget)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.createButton = QPushButton(self.widget)
+        self.createButton = QPushButton(self.layoutWidget)
         self.createButton.setObjectName(u"createButton")
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.createButton.sizePolicy().hasHeightForWidth())
         self.createButton.setSizePolicy(sizePolicy1)
+        self.createButton.setStyleSheet(u"background-color: qlineargradient(spread:pad, x2:1, y1:1, x2:0, y2:0, stop:0 rgba(227, 235, 247, 255), stop:1 rgba(248, 237, 247, 255));")
 
         self.horizontalLayout_3.addWidget(self.createButton)
 
-        self.saveButton = QPushButton(self.widget)
+        self.saveButton = QPushButton(self.layoutWidget)
         self.saveButton.setObjectName(u"saveButton")
         sizePolicy1.setHeightForWidth(self.saveButton.sizePolicy().hasHeightForWidth())
         self.saveButton.setSizePolicy(sizePolicy1)
+        self.saveButton.setStyleSheet(u"background-color: qlineargradient(spread:pad, x2:1, y1:1, x2:0, y2:0, stop:0 rgba(227, 235, 247, 255), stop:1 rgba(248, 237, 247, 255));")
 
         self.horizontalLayout_3.addWidget(self.saveButton)
 
-        self.deleteButton = QPushButton(self.widget)
+        self.deleteButton = QPushButton(self.layoutWidget)
         self.deleteButton.setObjectName(u"deleteButton")
         sizePolicy1.setHeightForWidth(self.deleteButton.sizePolicy().hasHeightForWidth())
         self.deleteButton.setSizePolicy(sizePolicy1)
+        self.deleteButton.setStyleSheet(u"background-color: qlineargradient(spread:pad, x2:1, y1:1, x2:0, y2:0, stop:0 rgba(227, 235, 247, 255), stop:1 rgba(248, 237, 247, 255));")
+        self.deleteButton.setFlat(False)
 
         self.horizontalLayout_3.addWidget(self.deleteButton)
 
         self.nextBtn = QPushButton(Dialog)
         self.nextBtn.setObjectName(u"nextBtn")
-        self.nextBtn.setGeometry(QRect(610, 10, 91, 24))
+        self.nextBtn.setGeometry(QRect(520, 20, 111, 24))
 
         self.retranslateUi(Dialog)
 
