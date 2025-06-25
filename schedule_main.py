@@ -4,6 +4,8 @@ import PySide6
 import sqlite3
 from PySide6.QtWidgets import QApplication, QMainWindow, QDialog, QInputDialog, QLineEdit, QButtonGroup, QCompleter
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QTextCursor, QTextCharFormat, QColor
+
 
 from genscheduleinterface import Ui_MainWindow
 from geneditwindow import Ui_Dialog
@@ -26,14 +28,14 @@ class EditWindow(QDialog):
         self.current_day_week = None
         self.current_edit_widget = None
 
-        self.records = []
-        self.current_index = 0
+        self.need_row = []
+        self.index = 0
 
         self.ui.saveButton.clicked.connect(self.save_edit)
         self.ui.deleteButton.clicked.connect(self.delete_edit)
         self.ui.createButton.clicked.connect(self.create_edit)
 
-        self.ui.nextBtn.clicked.connect(self.load_next_record)
+        self.ui.nextBtn.clicked.connect(self.load_row)
 
         times = ["8.30-10.00", "10.10-11.40", "11.50-13.20", "13.50-15.20", "15.30-17.00", "17.10-18.40"]
         self.ui.timeBox.addItems(times)
@@ -56,11 +58,10 @@ class EditWindow(QDialog):
             FROM schedule_h
             WHERE group_number = ? AND day_week = ?;
         ''', (group_number, day_week))
-        self.records = cursor.fetchall()
-        self.current_index = 0
+        self.need_row = cursor.fetchall()
 
-        if self.records:
-            self.show_record(self.current_index)
+        if self.need_row:
+            self.show_row(self.index)
         else:
             index = self.ui.timeBox.findText(time_slot)
             if index >= 0:
@@ -81,9 +82,9 @@ class EditWindow(QDialog):
             self.current_group_number = group_number
             self.current_day_week = day_week
 
-    def show_record(self, index):
-        if 0 <= index < len(self.records):
-            self.current_id, time_val, nechot_val, subject_val, lesson_val, teacher_val, room_val, group_val, day_val = self.records[index]
+    def show_row(self, index):
+        if 0 <= index < len(self.need_row):
+            self.current_id, time_val, nechot_val, subject_val, lesson_val, teacher_val, room_val, group_val, day_val = self.need_row[index]
 
             self.current_time_slot = time_val
             self.current_group_number = group_val
@@ -120,13 +121,13 @@ class EditWindow(QDialog):
                 self.ui.radPrac.setChecked(True)
 
 
-    def load_next_record(self):
-        if not self.records:
+    def load_row(self):
+        if not self.need_row:
             return
-        self.current_index += 1
-        if self.current_index >= len(self.records):
-            self.current_index = 0
-        self.show_record(self.current_index)
+        self.index += 1
+        if self.index >= len(self.need_row):
+            self.index = 0
+        self.show_row(self.index)
 
     def save_edit(self):
         time_val = self.ui.timeBox.currentText()
@@ -187,6 +188,7 @@ class ScheduleInterface(QMainWindow):
         self.ui.setupUi(self)
 
         self.ui.lineEdit.editingFinished.connect(self.show_full)
+        self.ui.allEdit.textChanged.connect(self.highlight)
 
         self.ui.roomBox.stateChanged.connect(self.checkbox_filters)
         self.ui.lessonBox.stateChanged.connect(self.checkbox_filters)
@@ -258,6 +260,50 @@ class ScheduleInterface(QMainWindow):
         self.connect_double_clicks()
 
         self.edit_window = EditWindow()
+
+    def highlight(self):
+        highlightable = self.ui.allEdit.text()
+        if not highlightable:
+            self.clear_highlight()
+            return
+        for dayweek, timenwidget in self.daysntimes.items():
+            for _, edit_widget in timenwidget:
+                self.highlight_text(edit_widget, highlightable)
+
+    def clear_highlight(self):
+        for dayweek, timenwidget in self.daysntimes.items():
+            for _, edit_widget in timenwidget:
+                text = edit_widget.toPlainText() if hasattr(edit_widget, 'toPlainText') else edit_widget.text()
+                if hasattr(edit_widget, 'clear'):
+                    edit_widget.clear()
+                if hasattr(edit_widget, 'setPlainText'):
+                    edit_widget.setPlainText(text)
+                elif hasattr(edit_widget, 'setText'):
+                    edit_widget.setText(text)
+
+    def highlight_text(self, widget, text):
+        if not hasattr(widget, 'toPlainText'):
+            return
+        content = widget.toPlainText()
+        widget.moveCursor(QTextCursor.Start)
+        cursor = widget.textCursor()
+        fmt_clear = QTextCharFormat()
+        fmt_clear.setBackground(Qt.transparent)
+        cursor.select(QTextCursor.Document)
+        cursor.setCharFormat(fmt_clear)
+        cursor.clearSelection()
+        widget.setTextCursor(cursor)
+        fmt = QTextCharFormat()
+        fmt.setBackground(QColor('#F473B1'))
+        pos = 0
+        while True:
+            pos = content.lower().find(text.lower(), pos)
+            if pos == -1:
+                break
+            cursor.setPosition(pos)
+            cursor.movePosition(QTextCursor.Right, QTextCursor.KeepAnchor, len(text))
+            cursor.mergeCharFormat(fmt)
+            pos += len(text)
     
     def possible_line(self):
         cursor.execute('SELECT DISTINCT group_number FROM schedule_h')
@@ -300,12 +346,13 @@ class ScheduleInterface(QMainWindow):
             schedule = cursor.fetchall()
             line_row = []
             for row in schedule:
-                line_connect = '\n==================\n'.join(str(item) for item in row if item)+'\n++++++++++++++++++\n'
+                line_connect = '\n==================\n'.join(str(item) for item in row if item)+'\n   |     |     |     |     |     |     |     |\n++++++++++++++++++\n   |     |     |     |     |     |     |     |'
                 line_row.append(line_connect)
             text = '\n'.join(line_row)
             edit_widget.setText(text)
 
     def checkbox_filters(self):
+        position = 0
         search = self.ui.lineEdit.text()
         columns = []
         if self.ui.timeBox.isChecked():
@@ -320,13 +367,11 @@ class ScheduleInterface(QMainWindow):
             columns.append('subject')
         if self.ui.weekBox.isChecked():
             columns.append('type_week')
-
         if not columns:
             for dayweek, timenwidget in self.daysntimes.items():
                 for _, edit_widget in timenwidget:
                     edit_widget.clear()
             return
-
         for dayweek, timenwidget in self.daysntimes.items():
             for time_sche, edit_widget in timenwidget:
                 column_name = ', '.join(columns)
@@ -338,8 +383,10 @@ class ScheduleInterface(QMainWindow):
                 rows = cursor.fetchall()
                 line_row = []
                 for row in rows:
-                    line_connect = ' ||| '.join(str(item) for item in row if item)
+                    position += 1
+                    line_connect = f'{str(position)}) ' + ' ||| '.join(str(item) for item in row if item)
                     line_row.append(line_connect)
+                position = 0
                 text = '\n==================\n'.join(line_row)
                 edit_widget.setText(text)
             

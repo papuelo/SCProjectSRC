@@ -952,7 +952,7 @@ class Ui_MainWindow(object):
         self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
         self.lineEdit = QLineEdit(self.frame_2)
         self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setGeometry(QRect(400, 102, 561, 21))
+        self.lineEdit.setGeometry(QRect(400, 102, 250, 21))
         sizePolicy2.setHeightForWidth(self.lineEdit.sizePolicy().hasHeightForWidth())
         self.lineEdit.setSizePolicy(sizePolicy2)
         self.lineEdit.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
@@ -1046,6 +1046,16 @@ class Ui_MainWindow(object):
 
         self.gridLayout.setColumnStretch(0, 1)
         self.gridLayout.setColumnStretch(1, 1)
+        self.allEdit = QLineEdit(self.frame_2)
+        self.allEdit.setObjectName(u"allEdit")
+        self.allEdit.setGeometry(QRect(671, 102, 291, 21))
+        sizePolicy2.setHeightForWidth(self.allEdit.sizePolicy().hasHeightForWidth())
+        self.allEdit.setSizePolicy(sizePolicy2)
+        self.allEdit.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.allEdit.setStyleSheet(u"background-color: rgba(255, 255, 255, 150)")
+        self.allEdit.setFrame(True)
+        self.allEdit.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.allEdit.setClearButtonEnabled(False)
         MainWindow.setCentralWidget(self.centralwidget)
         self.frame_2.raise_()
         self.frame.raise_()
@@ -1182,5 +1192,7 @@ class Ui_MainWindow(object):
         self.roomBox.setText(QCoreApplication.translate("MainWindow", u"\u0410\u0423\u0414\u0418\u0422\u041e\u0420\u0418\u042f", None))
         self.lessonBox.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0418\u041f \u0417\u0410\u041d\u042f\u0422\u0418\u0419", None))
         self.weekBox.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0415\u0414\u0415\u041b\u042f", None))
+        self.allEdit.setText("")
+        self.allEdit.setPlaceholderText("")
     # retranslateUi
 

@@ -2310,7 +2310,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <rect>
        <x>400</x>
        <y>102</y>
-       <width>561</width>
+       <width>250</width>
        <height>21</height>
       </rect>
      </property>
@@ -2541,6 +2541,43 @@ li.checked::marker { content: &quot;\2612&quot;; }
        </item>
       </layout>
      </widget>
+    </widget>
+    <widget class="QLineEdit" name="allEdit">
+     <property name="geometry">
+      <rect>
+       <x>671</x>
+       <y>102</y>
+       <width>291</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LayoutDirection::LeftToRight</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgba(255, 255, 255, 150)</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="frame">
+      <bool>true</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+     <property name="clearButtonEnabled">
+      <bool>false</bool>
+     </property>
     </widget>
    </widget>
    <zorder>frame_2</zorder>
