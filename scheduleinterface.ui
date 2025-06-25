@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1440</width>
-    <height>900</height>
+    <width>1920</width>
+    <height>1080</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,10 +26,10 @@
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>120</y>
-      <width>1351</width>
-      <height>731</height>
+      <x>100</x>
+      <y>170</y>
+      <width>1721</width>
+      <height>821</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -2287,10 +2287,10 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <widget class="QFrame" name="frame_2">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>-10</y>
-      <width>1401</width>
-      <height>131</height>
+      <x>270</x>
+      <y>10</y>
+      <width>1421</width>
+      <height>151</height>
      </rect>
     </property>
     <property name="layoutDirection">
@@ -2309,7 +2309,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <property name="geometry">
       <rect>
        <x>400</x>
-       <y>102</y>
+       <y>120</y>
        <width>250</width>
        <height>21</height>
       </rect>
@@ -2546,7 +2546,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <property name="geometry">
       <rect>
        <x>671</x>
-       <y>102</y>
+       <y>120</y>
        <width>291</width>
        <height>21</height>
       </rect>
@@ -2588,7 +2588,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1440</width>
+     <width>1920</width>
      <height>22</height>
     </rect>
    </property>

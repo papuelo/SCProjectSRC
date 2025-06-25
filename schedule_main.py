@@ -346,7 +346,7 @@ class ScheduleInterface(QMainWindow):
             schedule = cursor.fetchall()
             line_row = []
             for row in schedule:
-                line_connect = '\n==================\n'.join(str(item) for item in row if item)+'\n   |     |     |     |     |     |     |     |\n++++++++++++++++++\n   |     |     |     |     |     |     |     |'
+                line_connect = '\n=========================\n'.join(str(item) for item in row if item)+'\n   |     |     |     |     |     |     |     |     |     |     |\n+++++++++++++++++++++++++\n   |     |     |     |     |     |     |     |     |     |     |'
                 line_row.append(line_connect)
             text = '\n'.join(line_row)
             edit_widget.setText(text)
