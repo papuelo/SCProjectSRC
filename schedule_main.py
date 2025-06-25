@@ -120,7 +120,6 @@ class EditWindow(QDialog):
             elif lesson_val == 'практика':
                 self.ui.radPrac.setChecked(True)
 
-
     def load_row(self):
         if not self.need_row:
             return
@@ -281,24 +280,26 @@ class ScheduleInterface(QMainWindow):
         self.show_full()
 
     def highlight(self):
-        highlightable = self.ui.allEdit.text()
-        if not highlightable:
-            self.clear_highlight()
-            return
-        for dayweek, timenwidget in self.daysntimes.items():
-            for _, edit_widget in timenwidget:
-                self.highlight_text(edit_widget, highlightable)
+            highlightable = self.ui.allEdit.text()
+            if not highlightable:
+                self.clear_highlight()
+                return
+            for dayweek, timenwidget in self.daysntimes.items():
+                for _, edit_widget in timenwidget:
+                    self.highlight_text(edit_widget, highlightable)
 
     def clear_highlight(self):
         for dayweek, timenwidget in self.daysntimes.items():
             for _, edit_widget in timenwidget:
-                text = edit_widget.toPlainText() if hasattr(edit_widget, 'toPlainText') else edit_widget.text()
-                if hasattr(edit_widget, 'clear'):
-                    edit_widget.clear()
-                if hasattr(edit_widget, 'setPlainText'):
-                    edit_widget.setPlainText(text)
-                elif hasattr(edit_widget, 'setText'):
-                    edit_widget.setText(text)
+                if hasattr(edit_widget, 'toPlainText'):
+                    cursor = edit_widget.textCursor()
+                    cursor.select(QTextCursor.Document)
+                    fmt_clear = QTextCharFormat()
+                    fmt_clear.setBackground(Qt.transparent)
+                    fmt_clear.setForeground(Qt.black)
+                    cursor.setCharFormat(fmt_clear)
+                    cursor.clearSelection()
+                    edit_widget.setTextCursor(cursor)
 
     def highlight_text(self, widget, text):
         if not hasattr(widget, 'toPlainText'):
@@ -356,22 +357,53 @@ class ScheduleInterface(QMainWindow):
 
     def display_schedule(self, search, dayweek, timenwidget):
         for time_sche, edit_widget in timenwidget:
-            cursor.execute(f'''
+            cursor.execute('''
                 SELECT type_week, subject, type_subject, teacher, group_number, room
                 FROM schedule_h
                 WHERE group_number = ? and tme=? and day_week=?;		
             ''', (search, time_sche, dayweek))
 
             schedule = cursor.fetchall()
-            line_row = []
+            html_parts = []
             for row in schedule:
-                line_connect = '\n=========================\n'.join(str(item) for item in row if item)+'\n   |     |     |     |     |     |     |     |     |     |     |\n+++++++++++++++++++++++++\n   |     |     |     |     |     |     |     |     |     |     |'
-                line_row.append(line_connect)
-            text = '\n'.join(line_row)
-            edit_widget.setText(text)
+                type_week, subject, type_subject, teacher, group_number, room = row
+                html = f'''
+                <p>{type_week}</p>
+                <p>{subject}</p>
+                <p>{type_subject}</p>
+                <p>{teacher}</p>
+                <p>{group_number}</p>
+                <p>{room}</p>
+                <hr/>
+                '''
+                html_parts.append(html)
+            full_html = f'''
+            <!DOCTYPE HTML>
+            <html><head><meta charset="utf-8" />
+            <style type="text/css">
+            p {{
+                margin: 8px;
+                padding: 2px 8px;
+                color: #855f81;
+                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 13pt;
+                font-weight: bold;
+                background-color: #F9F9F9;
+                border-radius: 4px;
+            }}
+            hr {{
+                border: none;
+                border-top: 1px solid #D0D0D0;
+                margin: 6px 0;
+            }}
+            </style>
+            </head><body>
+            {''.join(html_parts)}
+            </body></html>
+            '''
+            edit_widget.setHtml(full_html)
 
     def checkbox_filters(self):
-        position = 0
         search = self.ui.lineEdit.text()
         columns = []
         if self.ui.timeBox.isChecked():
@@ -386,11 +418,13 @@ class ScheduleInterface(QMainWindow):
             columns.append('subject')
         if self.ui.weekBox.isChecked():
             columns.append('type_week')
+
         if not columns:
             for dayweek, timenwidget in self.daysntimes.items():
                 for _, edit_widget in timenwidget:
                     edit_widget.clear()
             return
+
         for dayweek, timenwidget in self.daysntimes.items():
             for time_sche, edit_widget in timenwidget:
                 column_name = ', '.join(columns)
@@ -400,14 +434,27 @@ class ScheduleInterface(QMainWindow):
                     WHERE group_number = ? AND tme = ? AND day_week = ?;
                 ''', (search, time_sche, dayweek))
                 rows = cursor.fetchall()
-                line_row = []
-                for row in rows:
-                    position += 1
-                    line_connect = f'{str(position)}) ' + ' ||| '.join(str(item) for item in row if item)
-                    line_row.append(line_connect)
-                position = 0
-                text = '\n==================\n'.join(line_row)
-                edit_widget.setText(text)
+
+                html_rows = []
+                for idx, row in enumerate(rows, 1):
+                    line_connect = ' ||| '.join(str(item) for item in row if item)
+                    color = '#871F78' if idx % 2 == 1 else '#2E2E2E'
+                    html_rows.append(f'<p style="margin:0; padding:2px 6px; color:{color}; font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif; font-size: 12pt; font-weight: bold;">{idx}) {line_connect}</p>')
+
+                separator = '<hr style="border:none; border-top:1px solid #D0D0D0; margin:4px 0;">'
+
+                html_text = separator.join(html_rows)
+
+                full_html = f'''
+                <!DOCTYPE HTML>
+                <html>
+                <head><meta charset="utf-8" /></head>
+                <body style="background: hex(#ffffff); margin:0; padding:4px;">
+                {html_text}
+                </body>
+                </html>
+                '''
+                edit_widget.setHtml(full_html)
             
 if __name__ == "__main__":
     app = QApplication(sys.argv)

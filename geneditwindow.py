@@ -33,63 +33,6 @@ class Ui_Dialog(object):
         self.editframe.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout = QGridLayout(self.editframe)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.lessonELABE = QLabel(self.editframe)
-        self.lessonELABE.setObjectName(u"lessonELABE")
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.lessonELABE.sizePolicy().hasHeightForWidth())
-        self.lessonELABE.setSizePolicy(sizePolicy)
-        self.lessonELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
-
-        self.gridLayout.addWidget(self.lessonELABE, 3, 0, 1, 1)
-
-        self.timeELABE = QLabel(self.editframe)
-        self.timeELABE.setObjectName(u"timeELABE")
-        self.timeELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
-
-        self.gridLayout.addWidget(self.timeELABE, 0, 0, 1, 1)
-
-        self.subjectETEXT = QLineEdit(self.editframe)
-        self.subjectETEXT.setObjectName(u"subjectETEXT")
-        self.subjectETEXT.setStyleSheet(u"background-color: rgba(255, 255, 255, 160)")
-        self.subjectETEXT.setFrame(False)
-
-        self.gridLayout.addWidget(self.subjectETEXT, 2, 2, 1, 1)
-
-        self.roomELABE = QLabel(self.editframe)
-        self.roomELABE.setObjectName(u"roomELABE")
-        self.roomELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
-
-        self.gridLayout.addWidget(self.roomELABE, 5, 0, 1, 1)
-
-        self.groupELABE = QLabel(self.editframe)
-        self.groupELABE.setObjectName(u"groupELABE")
-        self.groupELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
-
-        self.gridLayout.addWidget(self.groupELABE, 6, 0, 1, 1)
-
-        self.timeBox = QComboBox(self.editframe)
-        self.timeBox.setObjectName(u"timeBox")
-        self.timeBox.setAutoFillBackground(False)
-        self.timeBox.setStyleSheet(u"background-color: rgba(255, 255, 255, 70)")
-        self.timeBox.setFrame(True)
-
-        self.gridLayout.addWidget(self.timeBox, 0, 2, 1, 1)
-
-        self.teacherETEXT = QLineEdit(self.editframe)
-        self.teacherETEXT.setObjectName(u"teacherETEXT")
-        self.teacherETEXT.setStyleSheet(u"background-color: rgba(255, 255, 255, 160)")
-        self.teacherETEXT.setFrame(False)
-
-        self.gridLayout.addWidget(self.teacherETEXT, 4, 2, 1, 1)
-
-        self.teacherELABE = QLabel(self.editframe)
-        self.teacherELABE.setObjectName(u"teacherELABE")
-        self.teacherELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
-
-        self.gridLayout.addWidget(self.teacherELABE, 4, 0, 1, 1)
-
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(80, -1, -1, -1)
@@ -114,19 +57,38 @@ class Ui_Dialog(object):
 
         self.gridLayout.addLayout(self.horizontalLayout, 1, 2, 1, 1)
 
-        self.groupETEXT = QLineEdit(self.editframe)
-        self.groupETEXT.setObjectName(u"groupETEXT")
-        self.groupETEXT.setStyleSheet(u"background-color: rgba(255, 255, 255, 160)")
-        self.groupETEXT.setFrame(False)
+        self.subjectETEXT = QLineEdit(self.editframe)
+        self.subjectETEXT.setObjectName(u"subjectETEXT")
+        self.subjectETEXT.setStyleSheet(u"background-color: rgba(255, 255, 255, 160)")
+        self.subjectETEXT.setFrame(False)
 
-        self.gridLayout.addWidget(self.groupETEXT, 6, 2, 1, 1)
+        self.gridLayout.addWidget(self.subjectETEXT, 2, 2, 1, 1)
 
-        self.roomETEXT = QLineEdit(self.editframe)
-        self.roomETEXT.setObjectName(u"roomETEXT")
-        self.roomETEXT.setStyleSheet(u"background-color: rgba(255, 255, 255, 160)")
-        self.roomETEXT.setFrame(False)
+        self.teacherETEXT = QLineEdit(self.editframe)
+        self.teacherETEXT.setObjectName(u"teacherETEXT")
+        self.teacherETEXT.setStyleSheet(u"background-color: rgba(255, 255, 255, 160)")
+        self.teacherETEXT.setFrame(False)
 
-        self.gridLayout.addWidget(self.roomETEXT, 5, 2, 1, 1)
+        self.gridLayout.addWidget(self.teacherETEXT, 4, 2, 1, 1)
+
+        self.timeBox = QComboBox(self.editframe)
+        self.timeBox.setObjectName(u"timeBox")
+        self.timeBox.setAutoFillBackground(False)
+        self.timeBox.setStyleSheet(u"background-color: rgba(255, 255, 255, 70)")
+        self.timeBox.setFrame(True)
+
+        self.gridLayout.addWidget(self.timeBox, 0, 2, 1, 1)
+
+        self.lessonELABE = QLabel(self.editframe)
+        self.lessonELABE.setObjectName(u"lessonELABE")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.lessonELABE.sizePolicy().hasHeightForWidth())
+        self.lessonELABE.setSizePolicy(sizePolicy)
+        self.lessonELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
+
+        self.gridLayout.addWidget(self.lessonELABE, 3, 0, 1, 1)
 
         self.nechotELABE = QLabel(self.editframe)
         self.nechotELABE.setObjectName(u"nechotELABE")
@@ -135,6 +97,23 @@ class Ui_Dialog(object):
         self.nechotELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.gridLayout.addWidget(self.nechotELABE, 1, 0, 1, 1)
+
+        self.horizontalSpacer = QSpacerItem(60, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout.addItem(self.horizontalSpacer, 0, 1, 1, 1)
+
+        self.groupETEXT = QLineEdit(self.editframe)
+        self.groupETEXT.setObjectName(u"groupETEXT")
+        self.groupETEXT.setStyleSheet(u"background-color: rgba(255, 255, 255, 160)")
+        self.groupETEXT.setFrame(False)
+
+        self.gridLayout.addWidget(self.groupETEXT, 6, 2, 1, 1)
+
+        self.groupELABE = QLabel(self.editframe)
+        self.groupELABE.setObjectName(u"groupELABE")
+        self.groupELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
+
+        self.gridLayout.addWidget(self.groupELABE, 6, 0, 1, 1)
 
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setSpacing(0)
@@ -155,15 +134,36 @@ class Ui_Dialog(object):
 
         self.gridLayout.addLayout(self.horizontalLayout_2, 3, 2, 1, 1)
 
+        self.roomETEXT = QLineEdit(self.editframe)
+        self.roomETEXT.setObjectName(u"roomETEXT")
+        self.roomETEXT.setStyleSheet(u"background-color: rgba(255, 255, 255, 160)")
+        self.roomETEXT.setFrame(False)
+
+        self.gridLayout.addWidget(self.roomETEXT, 5, 2, 1, 1)
+
+        self.roomELABE = QLabel(self.editframe)
+        self.roomELABE.setObjectName(u"roomELABE")
+        self.roomELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
+
+        self.gridLayout.addWidget(self.roomELABE, 5, 0, 1, 1)
+
+        self.timeELABE = QLabel(self.editframe)
+        self.timeELABE.setObjectName(u"timeELABE")
+        self.timeELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
+
+        self.gridLayout.addWidget(self.timeELABE, 0, 0, 1, 1)
+
         self.subjectELABE = QLabel(self.editframe)
         self.subjectELABE.setObjectName(u"subjectELABE")
         self.subjectELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
         self.gridLayout.addWidget(self.subjectELABE, 2, 0, 1, 1)
 
-        self.horizontalSpacer = QSpacerItem(60, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.teacherELABE = QLabel(self.editframe)
+        self.teacherELABE.setObjectName(u"teacherELABE")
+        self.teacherELABE.setStyleSheet(u"background-color: rgba(255, 255, 255, 0)")
 
-        self.gridLayout.addItem(self.horizontalSpacer, 0, 1, 1, 1)
+        self.gridLayout.addWidget(self.teacherELABE, 4, 0, 1, 1)
 
         self.frame = QFrame(Dialog)
         self.frame.setObjectName(u"frame")
@@ -216,18 +216,18 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
-        self.lessonELABE.setText(QCoreApplication.translate("Dialog", u"\u0422\u0438\u043f \u0437\u0430\u043d\u044f\u0442\u0438\u044f:", None))
-        self.timeELABE.setText(QCoreApplication.translate("Dialog", u"\u0412\u0440\u0435\u043c\u044f:", None))
-        self.roomELABE.setText(QCoreApplication.translate("Dialog", u"\u0410\u0443\u0434\u0438\u0442\u043e\u0440\u0438\u044f:", None))
-        self.groupELABE.setText(QCoreApplication.translate("Dialog", u"\u041d\u043e\u043c\u0435\u0440 \u0433\u0440\u0443\u043f\u043f\u044b:", None))
-        self.teacherELABE.setText(QCoreApplication.translate("Dialog", u"\u041f\u0440\u0435\u043f\u043e\u0434\u0430\u0432\u0430\u0442\u0435\u043b\u044c:", None))
         self.radChot.setText(QCoreApplication.translate("Dialog", u"\u0447\u0451\u0442", None))
         self.radNech.setText(QCoreApplication.translate("Dialog", u"\u043d\u0435\u0447\u0451\u0442", None))
         self.radNo.setText(QCoreApplication.translate("Dialog", u"\u043d\u0435\u0442 \u0447\u0451\u0442\u043d\u043e\u0441\u0442\u0438", None))
+        self.lessonELABE.setText(QCoreApplication.translate("Dialog", u"\u0422\u0438\u043f \u0437\u0430\u043d\u044f\u0442\u0438\u044f:", None))
         self.nechotELABE.setText(QCoreApplication.translate("Dialog", u"\u0427\u0451\u0442\u043d\u043e\u0441\u0442\u044c:", None))
+        self.groupELABE.setText(QCoreApplication.translate("Dialog", u"\u041d\u043e\u043c\u0435\u0440 \u0433\u0440\u0443\u043f\u043f\u044b:", None))
         self.radLec.setText(QCoreApplication.translate("Dialog", u"\u043b\u0435\u043a\u0446\u0438\u044f", None))
         self.radPrac.setText(QCoreApplication.translate("Dialog", u"\u043f\u0440\u0430\u043a\u0442\u0438\u043a\u0430", None))
+        self.roomELABE.setText(QCoreApplication.translate("Dialog", u"\u0410\u0443\u0434\u0438\u0442\u043e\u0440\u0438\u044f:", None))
+        self.timeELABE.setText(QCoreApplication.translate("Dialog", u"\u0412\u0440\u0435\u043c\u044f:", None))
         self.subjectELABE.setText(QCoreApplication.translate("Dialog", u"\u041f\u0440\u0435\u0434\u043c\u0435\u0442:", None))
+        self.teacherELABE.setText(QCoreApplication.translate("Dialog", u"\u041f\u0440\u0435\u043f\u043e\u0434\u0430\u0432\u0430\u0442\u0435\u043b\u044c:", None))
         self.createButton.setText(QCoreApplication.translate("Dialog", u"\u0421\u041e\u0417\u0414\u0410\u0422\u042c \u041d\u041e\u0412\u041e\u0415 \u041f\u041e\u041b\u0415", None))
         self.saveButton.setText(QCoreApplication.translate("Dialog", u"\u0421\u041e\u0425\u0420\u0410\u041d\u0418\u0422\u042c \u0418\u0417\u041c\u0415\u041d\u0415\u041d\u0418\u042f", None))
         self.deleteButton.setText(QCoreApplication.translate("Dialog", u"\u0423\u0414\u0410\u041b\u0418\u0422\u042c", None))
