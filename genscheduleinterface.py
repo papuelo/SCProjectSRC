@@ -1185,7 +1185,7 @@ class Ui_MainWindow(object):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:22pt;\">10.10</span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:22pt;\">-11.40</span></p></body></html>", None))
         self.lineEdit.setText("")
-        self.lineEdit.setPlaceholderText("")
+        self.lineEdit.setPlaceholderText("Номер группы")
         self.timeBox.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0420\u0415\u041c\u042f", None))
         self.subjectBox.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0420\u0415\u0414\u041c\u0415\u0422", None))
         self.teacherBox.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0420\u0415\u041f\u041e\u0414\u0410\u0412\u0410\u0422\u0415\u041b\u042c", None))
@@ -1193,6 +1193,6 @@ class Ui_MainWindow(object):
         self.lessonBox.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0418\u041f \u0417\u0410\u041d\u042f\u0422\u0418\u0419", None))
         self.weekBox.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0415\u0414\u0415\u041b\u042f", None))
         self.allEdit.setText("")
-        self.allEdit.setPlaceholderText("")
+        self.allEdit.setPlaceholderText("Поиск")
     # retranslateUi
 

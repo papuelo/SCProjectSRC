@@ -187,7 +187,7 @@ class ScheduleInterface(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.ui.lineEdit.editingFinished.connect(self.show_full)
+        self.ui.lineEdit.editingFinished.connect(self.show_fuller)
         self.ui.allEdit.textChanged.connect(self.highlight)
 
         self.ui.roomBox.stateChanged.connect(self.checkbox_filters)
@@ -260,6 +260,25 @@ class ScheduleInterface(QMainWindow):
         self.connect_double_clicks()
 
         self.edit_window = EditWindow()
+
+        self.load_for_saved()
+
+    def save_for_load(self, group_number):
+        cursor.execute('DELETE FROM saved_g;')
+        cursor.execute('INSERT INTO saved_g (group_number) VALUES (?);', (group_number,))
+        conn.commit()
+
+    def load_for_saved(self):
+        cursor.execute('SELECT group_number FROM saved_g LIMIT 1;')
+        row = cursor.fetchone()
+        group_number = row[0]
+        self.ui.lineEdit.setText(group_number)
+        self.show_full()
+
+    def show_fuller(self):
+        group_number = self.ui.lineEdit.text()
+        self.save_for_load(group_number)
+        self.show_full()
 
     def highlight(self):
         highlightable = self.ui.allEdit.text()
