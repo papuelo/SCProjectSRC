@@ -2,6 +2,7 @@ import sys
 import os
 import PySide6
 import sqlite3
+import re
 from PySide6.QtWidgets import QApplication, QMainWindow, QDialog, QInputDialog, QLineEdit, QButtonGroup, QCompleter
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QTextCursor, QTextCharFormat, QColor
@@ -275,6 +276,19 @@ class ScheduleInterface(QMainWindow):
 
         self.load_for_saved()
 
+    def highlight_html(self, widget, text):
+        if not hasattr(widget, 'saved_html'):
+            return
+        if not text:
+            widget.setHtml(widget.saved_html)
+            return
+        pattern = re.escape(text)
+        regex = re.compile(pattern, re.IGNORECASE)
+        def repl(m):
+            return f'<span style="background-color:#F473B1;">{m.group(0)}</span>'
+        highlighted_html = regex.sub(repl, widget.saved_html)
+        widget.setHtml(highlighted_html)
+
     def save_for_load(self, group_number):
         cursor.execute('DELETE FROM saved_g;')
         cursor.execute('INSERT INTO saved_g (group_number) VALUES (?);', (group_number,))
@@ -293,26 +307,20 @@ class ScheduleInterface(QMainWindow):
         self.show_full()
 
     def highlight(self):
-            highlightable = self.ui.allEdit.text()
-            if not highlightable:
-                self.clear_highlight()
-                return
-            for dayweek, timenwidget in self.daysntimes.items():
-                for _, edit_widget in timenwidget:
-                    self.highlight_text(edit_widget, highlightable)
+        highlightable = self.ui.allEdit.text()
+        if not highlightable:
+            self.clear_highlight()
+            return
+        for dayweek, timenwidget in self.daysntimes.items():
+            for _, edit_widget in timenwidget:
+                self.highlight_html(edit_widget, highlightable)
+
 
     def clear_highlight(self):
         for dayweek, timenwidget in self.daysntimes.items():
             for _, edit_widget in timenwidget:
-                if hasattr(edit_widget, 'toPlainText'):
-                    cursor = edit_widget.textCursor()
-                    cursor.select(QTextCursor.Document)
-                    fmt_clear = QTextCharFormat()
-                    fmt_clear.setBackground(Qt.transparent)
-                    fmt_clear.setForeground(Qt.black)
-                    cursor.setCharFormat(fmt_clear)
-                    cursor.clearSelection()
-                    edit_widget.setTextCursor(cursor)
+                if hasattr(edit_widget, 'saved_html'):
+                    edit_widget.setHtml(edit_widget.saved_html)
 
     def highlight_text(self, widget, text):
         if not hasattr(widget, 'toPlainText'):
@@ -414,6 +422,7 @@ class ScheduleInterface(QMainWindow):
             {''.join(html_parts)}
             </body></html>
             '''
+            edit_widget.saved_html = full_html
             edit_widget.setHtml(full_html)
 
     def checkbox_filters(self):
@@ -448,6 +457,10 @@ class ScheduleInterface(QMainWindow):
                 ''', (search, time_sche, dayweek))
                 rows = cursor.fetchall()
 
+                if not rows:
+                    edit_widget.clear()
+                    continue
+
                 html_rows = []
                 for idx, row in enumerate(rows, 1):
                     line_connect = ' ||| '.join(str(item) for item in row if item)
@@ -462,13 +475,15 @@ class ScheduleInterface(QMainWindow):
                 <!DOCTYPE HTML>
                 <html>
                 <head><meta charset="utf-8" /></head>
-                <body style="background: hex(#ffffff); margin:0; padding:4px;">
+                <body style="background: #ffffff; margin:0; padding:4px;">
                 {html_text}
                 </body>
                 </html>
                 '''
+                edit_widget.saved_html = full_html
                 edit_widget.setHtml(full_html)
-            
+
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
