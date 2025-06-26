@@ -26,7 +26,6 @@ class EditWindow(QDialog):
         self.current_time_slot = None
         self.current_group_number = None
         self.current_day_week = None
-        self.current_edit_widget = None
 
         self.need_row = []
         self.index = 0
@@ -49,7 +48,6 @@ class EditWindow(QDialog):
         self.radLess.addButton(self.ui.radPrac)   
 
     def load_info(self, time_slot, group_number, day_week, edit_widget):
-        self.current_edit_widget = edit_widget
         self.current_group_number = group_number
         self.current_day_week = day_week
 
@@ -74,11 +72,6 @@ class EditWindow(QDialog):
             self.ui.radLec.setChecked(False)
             self.ui.radPrac.setChecked(False)
 
-            self.original_time_slot = time_slot
-            self.original_group_number = group_number
-            self.original_day_week = day_week
-
-            self.current_time_slot = time_slot
             self.current_group_number = group_number
             self.current_day_week = day_week
 
@@ -89,10 +82,6 @@ class EditWindow(QDialog):
             self.current_time_slot = time_val
             self.current_group_number = group_val
             self.current_day_week = day_val
-
-            self.original_time_slot = time_val
-            self.original_group_number = group_val
-            self.original_day_week = day_val
 
             index_time = self.ui.timeBox.findText(str(time_val))
             if index_time >= 0:
@@ -121,8 +110,6 @@ class EditWindow(QDialog):
                 self.ui.radPrac.setChecked(True)
 
     def load_row(self):
-        if not self.need_row:
-            return
         self.index += 1
         if self.index >= len(self.need_row):
             self.index = 0
