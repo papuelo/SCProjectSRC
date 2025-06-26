@@ -27,9 +27,9 @@
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>170</y>
+      <y>130</y>
       <width>1721</width>
-      <height>821</height>
+      <height>881</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -2288,9 +2288,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="geometry">
      <rect>
       <x>270</x>
-      <y>10</y>
+      <y>0</y>
       <width>1421</width>
-      <height>151</height>
+      <height>141</height>
      </rect>
     </property>
     <property name="layoutDirection">
@@ -2309,7 +2309,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <property name="geometry">
       <rect>
        <x>400</x>
-       <y>120</y>
+       <y>100</y>
        <width>250</width>
        <height>21</height>
       </rect>
@@ -2345,9 +2345,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <widget class="QFrame" name="frame_3">
      <property name="geometry">
       <rect>
-       <x>400</x>
-       <y>15</y>
-       <width>561</width>
+       <x>380</x>
+       <y>10</y>
+       <width>601</width>
        <height>81</height>
       </rect>
      </property>
@@ -2371,7 +2371,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <rect>
         <x>50</x>
         <y>10</y>
-        <width>461</width>
+        <width>511</width>
         <height>61</height>
        </rect>
       </property>
@@ -2546,7 +2546,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <property name="geometry">
       <rect>
        <x>671</x>
-       <y>120</y>
+       <y>100</y>
        <width>291</width>
        <height>21</height>
       </rect>

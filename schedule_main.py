@@ -3,7 +3,7 @@ import os
 import PySide6
 import sqlite3
 import re
-from PySide6.QtWidgets import QApplication, QMainWindow, QDialog, QInputDialog, QLineEdit, QButtonGroup, QCompleter
+from PySide6.QtWidgets import QApplication, QMainWindow, QDialog, QInputDialog, QLineEdit, QButtonGroup, QCompleter, QLabel, QVBoxLayout
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QTextCursor, QTextCharFormat, QColor
 
@@ -82,7 +82,7 @@ class EditWindow(QDialog):
             self.ui.radNo.setChecked(True)
             self.ui.radLec.setChecked(False)
             self.ui.radPrac.setChecked(False)
-
+            self.ui.radOther.setChecked(True)
             self.current_group_number = group_number
             self.current_day_week = day_week
 
@@ -199,6 +199,17 @@ class ScheduleInterface(QMainWindow):
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+        self.legend_label = QLabel()
+        self.legend_label.setText(
+            '<b>Цвет недели:</b> '
+            '<span style="background-color:#D0E7FF; padding:2px 6px; border-radius:3px;">&nbsp;&nbsp;</span> — нечёт, '
+            '<span style="background-color:#E6D0FF; padding:2px 6px; border-radius:3px;">&nbsp;&nbsp;</span> — чёт'
+        )
+        self.legend_label.setAlignment(Qt.AlignCenter)
+        self.legend_label.setStyleSheet("font-size: 14pt; margin: 8px;")
+
+        self.statusBar().addPermanentWidget(self.legend_label)
 
         self.ui.lineEdit.editingFinished.connect(self.show_fuller)
         self.ui.allEdit.textChanged.connect(self.highlight)
@@ -357,9 +368,9 @@ class ScheduleInterface(QMainWindow):
     def connect_double_clicks(self):
         for dayweek, timenwidget in self.daysntimes.items():
             for time_slot, edit_widget in timenwidget:
-                edit_widget.mouseDoubleClickEvent = lambda event, slot=time_slot, widget=edit_widget, day=dayweek: self.on_double_click(event, slot, widget, day)
+                edit_widget.mouseDoubleClickEvent = lambda event, slot=time_slot, day=dayweek: self.on_double_click(event, slot, day)
 
-    def on_double_click(self, event, time_slot, edit_widget, day_week):
+    def on_double_click(self, event, time_slot, day_week):
         password, ok = QInputDialog.getText(self, 'Требуется пароль', 'Введите пароль:', echo=QLineEdit.Password)
         if ok and self.check_password(password):
             group_number = self.ui.lineEdit.text()
@@ -386,44 +397,44 @@ class ScheduleInterface(QMainWindow):
 
             schedule = cursor.fetchall()
             html_parts = []
+            colors_variants = [
+                ["#68607A", "#C07AAA", "#8C9092", "#C07AAA"],
+                ["#68607A", "#86a6da", "#8C9092", "#86a6da"],
+            ]
+
             for row in schedule:
-                type_week, subject, type_subject, teacher, group_number, room = row
+                type_week, subject, type_subject, teacher, _, room = row
+
+                if type_week == 'нечёт':
+                    colors = colors_variants[1]
+                    subject_color = colors[1]
+                elif type_week == 'чёт':
+                    colors = colors_variants[0]
+                    subject_color = colors[1]
+                else:
+                    colors = colors_variants[0]
+                    subject_color = colors[0]
+
                 html = f'''
-                <p>{type_week}</p>
-                <p>{subject}</p>
-                <p>{type_subject}</p>
-                <p>{teacher}</p>
-                <p>{group_number}</p>
-                <p>{room}</p>
-                <hr/>
+                <div style="border-radius:4px; margin:8px 0; padding:6px 12px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                    <p style="color:{subject_color}; font-size:16pt; font-weight:900; margin:4px 0; padding: 2px 6px; border-radius: 3px;">{subject}</p>
+                    <p style="color:{colors[2]}; font-size:13pt; font-weight:700; margin:2px 0;">{type_subject}</p>
+                    <p style="color:{colors[0]}; font-size:12pt; font-weight:800; margin:2px 0;">{teacher}</p>
+                    <p style="color:{subject_color}; font-size:12pt; font-weight:900; margin:2px 0;">{room}</p>
+                </div>
                 '''
                 html_parts.append(html)
+
             full_html = f'''
             <!DOCTYPE HTML>
-            <html><head><meta charset="utf-8" />
-            <style type="text/css">
-            p {{
-                margin: 8px;
-                padding: 2px 8px;
-                color: #855f81;
-                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-                font-size: 13pt;
-                font-weight: bold;
-                background-color: #F9F9F9;
-                border-radius: 4px;
-            }}
-            hr {{
-                border: none;
-                border-top: 1px solid #D0D0D0;
-                margin: 6px 0;
-            }}
-            </style>
-            </head><body>
+            <html><head><meta charset="utf-8" /></head><body style="margin:0; padding:0;">
             {''.join(html_parts)}
             </body></html>
             '''
             edit_widget.saved_html = full_html
             edit_widget.setHtml(full_html)
+
+
 
     def checkbox_filters(self):
         search = self.ui.lineEdit.text()
@@ -464,7 +475,7 @@ class ScheduleInterface(QMainWindow):
                 html_rows = []
                 for idx, row in enumerate(rows, 1):
                     line_connect = ' ||| '.join(str(item) for item in row if item)
-                    color = '#871F78' if idx % 2 == 1 else '#2E2E2E'
+                    color = "#808080" if idx % 2 == 1 else "#a390c2"
                     html_rows.append(f'<p style="margin:0; padding:2px 6px; color:{color}; font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif; font-size: 12pt; font-weight: bold;">{idx}) {line_connect}</p>')
 
                 separator = '<hr style="border:none; border-top:1px solid #D0D0D0; margin:4px 0;">'
