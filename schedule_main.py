@@ -45,9 +45,19 @@ class EditWindow(QDialog):
         self.radChoose.addButton(self.ui.radNo)
         self.radLess = QButtonGroup(self)
         self.radLess.addButton(self.ui.radLec)
-        self.radLess.addButton(self.ui.radPrac)   
+        self.radLess.addButton(self.ui.radPrac)
+        self.radLess.addButton(self.ui.radOther)
+        self.ui.typeEdit.setEnabled(False)
+        self.radLess.buttonClicked.connect(self.on_radLess_changed)
 
-    def load_info(self, time_slot, group_number, day_week, edit_widget):
+    def on_radLess_changed(self):
+        checked_button = self.radLess.checkedButton()
+        if checked_button == self.ui.radOther:
+            self.ui.typeEdit.setEnabled(True)
+        else:
+            self.ui.typeEdit.setEnabled(False)   
+
+    def load_info(self, time_slot, group_number, day_week):
         self.current_group_number = group_number
         self.current_day_week = day_week
 
@@ -106,8 +116,14 @@ class EditWindow(QDialog):
 
             if lesson_val == 'лекция':
                 self.ui.radLec.setChecked(True)
+                self.ui.typeEdit.setEnabled(False)
             elif lesson_val == 'практика':
                 self.ui.radPrac.setChecked(True)
+                self.ui.typeEdit.setEnabled(False)
+            else:
+                self.ui.radOther.setChecked(True)
+                self.ui.typeEdit.setEnabled(True)
+                self.ui.typeEdit.setText(lesson_val)
 
     def load_row(self):
         self.index += 1
@@ -119,10 +135,15 @@ class EditWindow(QDialog):
         time_val = self.ui.timeBox.currentText()
         nechot_val = self.radChoose.checkedButton().text()
         subject_val = self.ui.subjectETEXT.text()
-        lesson_val = self.radLess.checkedButton().text()
         teacher_val = self.ui.teacherETEXT.text()
         room_val = self.ui.roomETEXT.text()
         group_val = self.ui.groupETEXT.text()
+        lesson_val = None
+        checked_button = self.radLess.checkedButton()
+        if checked_button == self.ui.radOther:
+            lesson_val = self.ui.typeEdit.text()
+        else:
+            lesson_val = checked_button.text()
 
         cursor.execute('''
             UPDATE schedule_h SET
@@ -152,11 +173,16 @@ class EditWindow(QDialog):
         time_val = self.ui.timeBox.currentText()
         nechot_val = self.radChoose.checkedButton().text()
         subject_val = self.ui.subjectETEXT.text()
-        lesson_val = self.radLess.checkedButton().text()
         teacher_val = self.ui.teacherETEXT.text()
         room_val = self.ui.roomETEXT.text()
         group_val = self.ui.groupETEXT.text()
         day_val = self.current_day_week
+        lesson_val = None
+        checked_button = self.radLess.checkedButton()
+        if checked_button == self.ui.radOther:
+            lesson_val = self.ui.typeEdit.text()
+        else:
+            lesson_val = checked_button.text()
 
         cursor.execute('''
             INSERT INTO schedule_h (tme, day_week, type_week, subject, type_subject, teacher, room, group_number)
@@ -329,7 +355,7 @@ class ScheduleInterface(QMainWindow):
         password, ok = QInputDialog.getText(self, 'Требуется пароль', 'Введите пароль:', echo=QLineEdit.Password)
         if ok and self.check_password(password):
             group_number = self.ui.lineEdit.text()
-            self.edit_window.load_info(time_slot, group_number, day_week, edit_widget)
+            self.edit_window.load_info(time_slot, group_number, day_week)
             self.edit_window.show()
             self.edit_window.raise_()
             self.edit_window.activateWindow()

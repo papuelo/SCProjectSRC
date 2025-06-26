@@ -32,6 +32,79 @@
     <enum>QFrame::Shadow::Raised</enum>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <item row="6" column="2">
+     <widget class="QLineEdit" name="groupETEXT">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 160)</string>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="subjectELABE">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 0)</string>
+      </property>
+      <property name="text">
+       <string>Предмет:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="2">
+     <widget class="QLineEdit" name="teacherETEXT">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 160)</string>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="roomELABE">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 0)</string>
+      </property>
+      <property name="text">
+       <string>Аудитория:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QComboBox" name="timeBox">
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 70)</string>
+      </property>
+      <property name="frame">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="teacherELABE">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 0)</string>
+      </property>
+      <property name="text">
+       <string>Преподаватель:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QLineEdit" name="subjectETEXT">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 160)</string>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="2">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <property name="leftMargin">
@@ -69,52 +142,29 @@
       </item>
      </layout>
     </item>
-    <item row="2" column="2">
-     <widget class="QLineEdit" name="subjectETEXT">
+    <item row="0" column="1">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Policy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>60</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="5" column="2">
+     <widget class="QLineEdit" name="roomETEXT">
       <property name="styleSheet">
        <string notr="true">background-color: rgba(255, 255, 255, 160)</string>
       </property>
       <property name="frame">
        <bool>false</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="2">
-     <widget class="QLineEdit" name="teacherETEXT">
-      <property name="styleSheet">
-       <string notr="true">background-color: rgba(255, 255, 255, 160)</string>
-      </property>
-      <property name="frame">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QComboBox" name="timeBox">
-      <property name="autoFillBackground">
-       <bool>false</bool>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgba(255, 255, 255, 70)</string>
-      </property>
-      <property name="frame">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="lessonELABE">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgba(255, 255, 255, 0)</string>
-      </property>
-      <property name="text">
-       <string>Тип занятия:</string>
       </property>
      </widget>
     </item>
@@ -134,29 +184,29 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Orientation::Horizontal</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Policy::Fixed</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>60</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="6" column="2">
-     <widget class="QLineEdit" name="groupETEXT">
+    <item row="0" column="0">
+     <widget class="QLabel" name="timeELABE">
       <property name="styleSheet">
-       <string notr="true">background-color: rgba(255, 255, 255, 160)</string>
+       <string notr="true">background-color: rgba(255, 255, 255, 0)</string>
       </property>
-      <property name="frame">
-       <bool>false</bool>
+      <property name="text">
+       <string>Время:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="lessonELABE">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 0)</string>
+      </property>
+      <property name="text">
+       <string>Тип занятия:</string>
       </property>
      </widget>
     </item>
@@ -171,12 +221,12 @@
      </widget>
     </item>
     <item row="3" column="2">
-     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0">
+     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0,0">
       <property name="spacing">
        <number>0</number>
       </property>
       <property name="leftMargin">
-       <number>150</number>
+       <number>0</number>
       </property>
       <item>
        <widget class="QRadioButton" name="radLec">
@@ -198,57 +248,36 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QRadioButton" name="radOther">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgba(255, 255, 255, 0)</string>
+        </property>
+        <property name="text">
+         <string>другое</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="typeEdit">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgba(255, 255, 255, 160)</string>
+        </property>
+        <property name="frame">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
      </layout>
-    </item>
-    <item row="5" column="2">
-     <widget class="QLineEdit" name="roomETEXT">
-      <property name="styleSheet">
-       <string notr="true">background-color: rgba(255, 255, 255, 160)</string>
-      </property>
-      <property name="frame">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="QLabel" name="roomELABE">
-      <property name="styleSheet">
-       <string notr="true">background-color: rgba(255, 255, 255, 0)</string>
-      </property>
-      <property name="text">
-       <string>Аудитория:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="timeELABE">
-      <property name="styleSheet">
-       <string notr="true">background-color: rgba(255, 255, 255, 0)</string>
-      </property>
-      <property name="text">
-       <string>Время:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="subjectELABE">
-      <property name="styleSheet">
-       <string notr="true">background-color: rgba(255, 255, 255, 0)</string>
-      </property>
-      <property name="text">
-       <string>Предмет:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="teacherELABE">
-      <property name="styleSheet">
-       <string notr="true">background-color: rgba(255, 255, 255, 0)</string>
-      </property>
-      <property name="text">
-       <string>Преподаватель:</string>
-      </property>
-     </widget>
     </item>
    </layout>
   </widget>
